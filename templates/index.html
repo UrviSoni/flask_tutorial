@@ -6,16 +6,20 @@
 <body>
     <!-- This is example of comments into html - you can see it into serverside via inspect element-->
     {# This is an example of jinja2 comments - you can't see it into serverside via inspect element #}
-    <p> Welcome! {{ first_name }}</p>
-    <h2>{{ first_name | upper}}</h2>
-    <h2>{{ first_name | lower}}</h2>
-    <h2>{{ 'urvi soni' | title}}</h2>
-    <h2>{{ 'urvi soni' | capitalize}}</h2>
-    <h1>{{ first_name }} {{ last_name }}</h1>
-    <h2>Total Course: {{ course | length }}</h2>
-    <h3>City: {{ city }}</h3>
-    <h4>Original Price: {{ price }}</h4>
-    <h5>GST Included Price: {{ price + 90 }}</h5>
-    <p>{{ 10 * 20 }}</p>
+    {%if is_logged_in%}
+    <h1>Welcome Back!</h1>
+    {% else %}
+    <h1>Please Login</h1>
+    {% endif %}
+    {% if marks>= 90 %}
+    <h2> Grade A</h2>
+    {% elif marks >= 75 %}
+    <h2> Grade B </h2>
+    {% elif marks >= 50 %}
+    <h2> Grade C</h2>
+    {% else %}
+    <h1>Fail</h1>
+    {% endif %}
+
 </body>
 </html>
