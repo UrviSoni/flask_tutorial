@@ -13,8 +13,23 @@ def about():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == 'POST':
-        name = request.form.get("username")
-        return f"Hello, {name}"
+        name = request.form.get("name").strip()
+        email = request.form.get("email").strip()
+        age = request.form.get("age").strip()
+        if not name:
+            return "Name is Required"
+        if not email:
+            return "Email is Required"
+        if not age:
+            return "Age is Required"
+        if not age.isdigit():
+            return "Age must be a number"
+        age = int(age)
+        return "Registration Successful"
+        # print("Name: ", name)
+        # print("EMail: ", email)
+        # print("Message: ", message)
+        # return f"Hello, {name}"
     return render_template("contact.html")
 
 @app.route("/search")
