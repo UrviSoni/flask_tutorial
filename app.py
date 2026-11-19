@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 
 app = Flask(__name__)
 
@@ -7,6 +7,23 @@ app.secret_key = "change-this-in-prod"
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/login")
+def login():
+    session['username'] = 'Urvi'
+    return "Login Successful!"
+
+@app.route("/dashboard")
+def dashboard():
+    username = session.get("usesrname")
+    if not username:
+        return "Please login first!"
+    return f"Welcome! {username}"
+
+@app.route("/logout")
+def logout():
+    session.pop("username", None)
+    return "Logged Out!"
 
 @app.route("/about")
 def about():
