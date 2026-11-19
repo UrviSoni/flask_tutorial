@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -25,12 +25,12 @@ def contact():
         if not age.isdigit():
             return "Age must be a number"
         age = int(age)
-        return "Registration Successful"
-        # print("Name: ", name)
-        # print("EMail: ", email)
-        # print("Message: ", message)
-        # return f"Hello, {name}"
+        return redirect(url_for("success"))
     return render_template("contact.html")
+
+@app.route("/registration-success")
+def success():
+    return "Registration Successful"
 
 @app.route("/search")
 def search():
